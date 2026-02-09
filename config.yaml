@@ -1,0 +1,96 @@
+data:
+  data_keys: ["metr-la", "pems-bay", "chengdu_m", "shenzhen"]
+  metr-la:
+    dataset_path: ./data/metr-la/dataset.npy
+    adjacency_matrix_path: ./data/metr-la/matrix.npy
+    time_step: 34272
+    node_num: 207
+    speed_mean: 58.465786
+    speed_std: 12.905341
+  pems-bay:
+    dataset_path: ./data/pems-bay/dataset.npy
+    adjacency_matrix_path: ./data/pems-bay/matrix.npy
+    time_step: 52116
+    node_num: 325
+    speed_mean: 62.621582859
+    speed_std: 9.58811369696
+  chengdu_m:
+    dataset_path: ./data/chengdu_m/dataset.npy
+    adjacency_matrix_path: ./data/chengdu_m/matrix.npy
+    time_step: 17280
+    node_num: 524
+    speed_mean: 29.0982979559
+    speed_std: 9.75304346669
+  shenzhen:
+    dataset_path: ./data/shenzhen/dataset.npy
+    adjacency_matrix_path: ./data/shenzhen/matrix.npy
+    time_step: 17280
+    node_num: 627
+    speed_mean: 30.5735608506
+    speed_std: 11.0922606598
+
+task:
+  his_num: 12
+  pred_num: 6
+  batch_size: 5
+  test_batch_size: 128
+  task_num: 4
+model:
+  # Base dimensions
+  node_feature_dim: 2
+  edge_feature_dim: 4
+  message_dim: 16
+  hidden_dim: 16
+  output_dim: 1
+  meta_dim: 16
+
+  # Attention parameters
+  num_heads: 8
+
+  # Learning rates
+  update_lr: 0.005
+  meta_lr: 0.01
+
+  # Training parameters
+  loss_lambda: 0.1
+  update_step: 5
+  update_step_test: 10
+
+  # Enable pattern learning
+  tp: True
+  sp: True
+
+training:
+  source_epochs: 200
+  target_epochs: 100
+  weight_decay: 0.00001
+  early_stop_patience: 20
+
+  # Learning rate schedule
+  use_lr_scheduler: True
+  lr_scheduler_patience: 10
+  lr_scheduler_factor: 0.5
+
+  use_amp: True
+
+evaluation:
+  target_days: 3
+  time_horizons: [5, 10, 15, 30, 60, 120]
+
+  # Research questions
+  enable_rq1: True # Spatial dependency preservation
+  enable_rq2: True # Temporal alignment
+  enable_rq3: True # Cross-domain feature fusion
+  enable_rq4: True # Graph structure consistency
+  enable_rq5: True # Sample efficiency
+
+  # Few-shot learning parameters
+  k_shot: 5 
+  adaptation_steps: 10 
+
+system:
+  use_cache: True
+  cache_dir: "./cache"
+  results_dir: "./results"
+  use_gpu: True
+  seed: 42
