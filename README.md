@@ -200,12 +200,6 @@ If ST-FSFusion contributes to your research, please cite:
 
 ---
 
-## Contributing
-
-Contributions are welcome. Please open an issue to discuss changes before submitting a pull request. See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
-
----
-
 ## License
 
 Released under the [MIT License](LICENSE).
