@@ -1,0 +1,25 @@
+MCD-CKT EXPERIMENT SUMMARY
+==================================================
+Dataset    : shenzhen
+Timestamp  : 2026-05-01 02:04:50
+
+MODEL
+----------------------------------------
+Hidden dim : 64
+Meta dim   : 32
+Message dim: 8
+Temporal   : True
+Spatial    : True
+Parameters : 119,944
+
+TRAINING
+----------------------------------------
+LR         : 0.0001
+Src epochs : 200
+Tgt epochs : 300
+
+RESULTS (avg first 6 steps)
+----------------------------------------
+MAE  : 2.3473
+RMSE : 3.5419
+MAPE : 10.11%

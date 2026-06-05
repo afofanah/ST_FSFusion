@@ -1,0 +1,116 @@
+data:
+  data_keys: ["metr-la", "pems-bay", "shenzhen", "chengdu_m"]
+
+  metr-la:
+    dataset_path: data/metr-la/dataset.npy
+    adjacency_matrix_path: data/metr-la/matrix.npy
+    num_nodes: 207
+    node_feature_dim: 1
+    speed_mean: 58.465786
+    speed_std: 12.905341
+
+  pems-bay:
+    dataset_path: data/pems-bay/dataset.npy
+    adjacency_matrix_path: data/pems-bay/matrix.npy
+    num_nodes: 325
+    node_feature_dim: 1
+    speed_mean: 62.621583
+    speed_std: 9.588114
+
+  chengdu_m:
+    dataset_path: data/chengdu_m/dataset.npy
+    adjacency_matrix_path: data/chengdu_m/matrix.npy
+    num_nodes: 524
+    node_feature_dim: 1
+    speed_mean: 29.098298
+    speed_std: 9.753043
+
+  shenzhen:
+    dataset_path: data/shenzhen/dataset.npy
+    adjacency_matrix_path: data/shenzhen/matrix.npy
+    num_nodes: 627
+    node_feature_dim: 1
+    speed_mean: 30.573561
+    speed_std: 11.092261
+
+model:
+  type: MetaCrossDomainFusion   # MetaCrossDomainFusion | MetaCross_DomainFusion | TransformerBased
+  hidden_dim: 64
+  meta_dim: 32
+  message_dim: 8
+  num_heads: 4
+  dropout: 0.1
+  tp: true
+  sp: true
+  output_dim: 1
+  # Low-rank meta-knowledge regularisation (paper Eq. 4)
+  nuclear_norm_weight: 0.001
+  # FSL hybrid loss weights (paper Eq. 14)
+  lambda1: 0.1
+  lambda2: 0.01
+  # Few-shot proximity constraint (paper Eq. 16)
+  epsilon: 0.1
+  # RobustTransformer noise injection (paper Eq. 8)
+  noise_tau: 0.1
+  noise_alpha: 0.05
+  enable_noise: true
+
+task:
+  his_num: 12
+  pred_num: 12
+  seq_len: 12
+  batch_size: 1
+  test_batch_size: 1
+  model_batch_size: 8
+
+training:
+  epochs: 200
+  learning_rate: 0.0001
+  weight_decay: 1e-4
+  gradient_clip: 1.0
+  target_lr: 5e-5
+  minibatch_size: 4096
+  model_batch_size: 8
+
+  scheduler:
+    type: plateau
+    factor: 0.5
+    patience: 5
+    min_lr: 1e-6
+
+  early_stopping:
+    patience: 30
+    min_delta: 1e-4
+    restore_best_weights: true
+    min_epochs: 20
+
+finetuning:
+  target_lr: 5e-6            # was 5e-5 — the primary cause of MAPE regression
+  weight_decay: 1e-3         # stronger than source training to resist overfitting
+  proximity_weight: 0.005
+  freeze_spatial_encoder: true
+ 
+  scheduler:
+    type: cosine              # smooth decay, no cliff-drops from plateau logic
+    T_max: 150                # half-period; fine-tuning should converge by ep ~100
+    eta_min: 1e-7             # floor — prevents vanishing-gradient stall
+ 
+  early_stopping:
+    patience: 40              # more patience than source; target loss is noisier
+    min_delta: 1e-4
+    restore_best_weights: true
+    min_epochs: 30
+
+experiment:
+  name: mcd_ckt
+  save_dir: experiments
+  seed: 42
+  device: auto
+
+# ── Research Question analyses (analyzer_mcd.py) ─────────────────────────────
+evaluation:
+  enable_rq1: true   
+  enable_rq2: true  
+  enable_rq3: true 
+  enable_rq4: true   
+  enable_rq5: true  

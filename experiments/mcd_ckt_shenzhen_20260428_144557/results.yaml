@@ -1,0 +1,23 @@
+dataset: shenzhen
+experiment: mcd_ckt
+model:
+  hidden_dim: 64
+  message_dim: 8
+  meta_dim: 32
+  num_heads: 4
+  sp: true
+  tp: true
+parameters: 119944
+performance:
+  avg_mae_6: 2.3472577929496765
+  avg_mape_6: 10.110122089584667
+  avg_rmse_6: 3.5419498646121723
+  best_mae: 1.884212613105774
+  best_mape: 7.9177699983119965
+  best_rmse: 2.7863471653709015
+timestamp: '2026-05-01 02:04:50'
+training:
+  learning_rate: 0.0001
+  source_epochs: 200
+  target_days: 3
+  target_epochs: 300

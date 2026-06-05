@@ -1,0 +1,87 @@
+data:
+  chengdu_m:
+    adjacency_matrix_path: data/chengdu_m/matrix.npy
+    dataset_path: data/chengdu_m/dataset.npy
+    node_feature_dim: 1
+    num_nodes: 524
+    speed_mean: 29.098298
+    speed_std: 9.753043
+  data_keys:
+  - metr-la
+  - pems-bay
+  - shenzhen
+  - chengdu_m
+  metr-la:
+    adjacency_matrix_path: data/metr-la/matrix.npy
+    dataset_path: data/metr-la/dataset.npy
+    node_feature_dim: 1
+    num_nodes: 207
+    speed_mean: 58.465786
+    speed_std: 12.905341
+  pems-bay:
+    adjacency_matrix_path: data/pems-bay/matrix.npy
+    dataset_path: data/pems-bay/dataset.npy
+    node_feature_dim: 1
+    num_nodes: 325
+    speed_mean: 62.621583
+    speed_std: 9.588114
+  shenzhen:
+    adjacency_matrix_path: data/shenzhen/matrix.npy
+    dataset_path: data/shenzhen/dataset.npy
+    node_feature_dim: 1
+    num_nodes: 627
+    speed_mean: 30.573561
+    speed_std: 11.092261
+evaluation:
+  enable_rq1: true
+  enable_rq2: true
+  enable_rq3: true
+  enable_rq4: true
+  enable_rq5: true
+experiment:
+  device: auto
+  name: mcd_ckt
+  save_dir: experiments
+  seed: 42
+model:
+  dropout: 0.1
+  enable_noise: true
+  epsilon: 0.1
+  hidden_dim: 64
+  lambda1: 0.1
+  lambda2: 0.01
+  message_dim: 8
+  meta_dim: 32
+  noise_alpha: 0.05
+  noise_tau: 0.1
+  nuclear_norm_weight: 0.001
+  num_heads: 4
+  output_dim: 1
+  sp: true
+  tp: true
+  type: MetaCrossDomainFusion
+task:
+  batch_size: 1
+  his_num: 12
+  model_batch_size: 8
+  pred_num: 12
+  seq_len: 12
+  test_batch_size: 1
+training:
+  early_stopping:
+    min_delta: 1e-4
+    min_epochs: 20
+    patience: 30
+    restore_best_weights: true
+  epochs: 200
+  gradient_clip: 1.0
+  learning_rate: 0.0001
+  minibatch_size: 4096
+  model_batch_size: 8
+  scheduler:
+    factor: 0.5
+    min_lr: 1e-6
+    patience: 5
+    type: plateau
+  target_lr: 5e-5
+  weight_decay: 1e-4
