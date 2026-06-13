@@ -288,11 +288,15 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 If you use this code in your research, please cite:
 
 ```bibtex
-@article{fofanahst,
-  title={ST-FSFusion: Spatio-Temporal Feature Fusion and Few-Shot Learning Framework 
-         with Cross-City Knowledge Transfer for Traffic Flow Prediction},
-  author={Fofanah, Abdul J and Wen, Lian and Chen, David and Zhang, Shaoyang and others},
-  journal={Kamara, ST-FSFusion: Spatio-Temporal Feature Fusion and Few-Shot Learning 
-           Framework with Cross-City Knowledge Transfer for Traffic Flow Prediction}
-}
+@article{FOFANAH2026100797,
+title = {Spatio-temporal feature fusion and few-shot learning framework with cross-city knowledge transfer for traffic flow prediction},
+journal = {Energy and AI},
+volume = {25},
+pages = {100797},
+year = {2026},
+issn = {2666-5468},
+doi = {https://doi.org/10.1016/j.egyai.2026.100797},
+url = {https://www.sciencedirect.com/science/article/pii/S2666546826001230},
+author = {Abdul Joseph Fofanah and Lian Wen and David Chen and Shaoyang Zhang and Alpha Alimamy Kamara},
+keywords = {Spatio-temporal, Feature fusion, Few-shot learning, Graph neural networks, Knowledge transfer, Traffic flow forecasting}
 ```
